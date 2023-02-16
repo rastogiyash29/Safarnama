@@ -15,8 +15,6 @@ class MainViewModel(var context:Context):ViewModel() {
         quoteLive.value=getQuote()
     }
 
-    var xyz=1
-
     private fun loadQuoteFromAssets(): ArrayList<Quote> {
         val inputStream = context.assets.open("quotes.json")
         val size: Int = inputStream.available()
