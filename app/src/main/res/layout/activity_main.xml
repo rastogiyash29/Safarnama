@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    We can define variables in data-binding-->
+    <data>
+<!--        <variable-->
+<!--            name="quote"-->
+<!--            type="com.example.safarnama.Quote" />-->
+        <variable
+            name="mainViewModel"
+            type="com.example.safarnama.MainViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/main_bg_gradient"
+    android:padding="20dp"
+    >
+
+
+    <TextView
+        android:id="@+id/AppName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quotify"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="50sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:fontFamily="cursive"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/QuoteCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/AppName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/quote_card_bg"
+        app:layout_constraintVertical_bias="0.35">
+
+        <ImageView
+            android:id="@+id/QuoteImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_baseline_format_quote_24"
+            />
+
+        <TextView
+            android:id="@+id/QuoteText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/QuoteImg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="25sp"
+            android:textColor="#ffedbc"
+            tools:text="Hello"
+            android:layout_marginStart="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="@{mainViewModel.quoteLive.text}"
+            />
+
+        <TextView
+            android:id="@+id/QuoteAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/QuoteText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="12sp"
+            android:textColor="#C4C4C4"
+            tools:text="Hello"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="20dp"
+            android:gravity="left"
+            android:text="@{mainViewModel.quoteLive.author}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_marginRight="24dp"
+        app:backgroundTint="#ff5e62"
+        android:onClick="onShare"
+        android:foregroundTint="#dc2430"
+        app:layout_constraintBottom_toBottomOf="@+id/QuoteCard"
+        app:layout_constraintEnd_toEndOf="@+id/QuoteCard"
+        app:layout_constraintTop_toBottomOf="@+id/QuoteCard"
+        app:srcCompat="@drawable/ic_baseline_share_24" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/PreviousButton"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTint="#000428"
+            android:text="PREVIOUS"
+            android:onClick="@{()->mainViewModel.previousQuote()}"
+            android:textColor="#000428"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            android:textSize="22sp"
+            app:drawableStartCompat="@drawable/ic_baseline_chevron_left_24" />
+
+        <TextView
+            android:id="@+id/NextButton"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+            android:drawableTint="#000428"
+            android:text="NEXT"
+            android:onClick="@{()->mainViewModel.nextQuote()}"
+            android:textAlignment="textEnd"
+            android:textColor="#000428"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
